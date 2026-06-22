@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>حاسبة التقدير</title>
+<style>
+body { font-family: sans-serif; background: #f0f4f8; display: flex; flex-direction: column; align-items: center; padding: 20px; }
+table { width: 100%; max-width: 600px; background: #fff; border-collapse: collapse; margin-bottom: 20px; }
+th, td { padding: 10px; border: 1px solid #ddd; text-align: center; }
+th { background: #2563eb; color: white; }
+select { width: 100%; padding: 8px; }
+button { background: #2563eb; color: white; padding: 15px 30px; border: none; border-radius: 8px; font-size: 18px; cursor: pointer; }
+.result { margin-top: 20px; padding: 20px; background: #e0f2fe; border-radius: 8px; font-weight: bold; font-size: 18px; text-align: center; }
+</style>
+</head>
+<body>
+
+<h1>حاسبة التقدير النهائي</h1>
+<table id="myTable">
+<thead><tr><th>المادة</th><th>الوحدات</th><th>التقدير</th></tr></thead>
+<tbody>
+<tr><td>تركيب ووظائف الجسم II</td><td>1.125</td><td><select class="grade"><option value="5">امتياز</option><option value="4.5">جيد جدا</option><option value="4">جيد</option><option value="3">متوسط</option><option value="2">مقبول</option><option value="1">ضعيف</option></select></td></tr>
+<tr><td>الوحدة الجهازية II</td><td>1.125</td><td><select class="grade"><option value="5">امتياز</option><option value="4.5">جيد جدا</option><option value="4">جيد</option><option value="3">متوسط</option><option value="2">مقبول</option><option value="1">ضعيف</option></select></td></tr>
+<tr><td>العلوم العصبية 1</td><td>0.75</td><td><select class="grade"><option value="5">امتياز</option><option value="4.5">جيد جدا</option><option value="4">جيد</option><option value="3">متوسط</option><option value="2">مقبول</option><option value="1">ضعيف</option></select></td></tr>
+<tr><td>علوم المختبرات السريرية</td><td>0.625</td><td><select class="grade"><option value="5">امتياز</option><option value="4.5">جيد جدا</option><option value="4">جيد</option><option value="3">متوسط</option><option value="2">مقبول</option><option value="1">ضعيف</option></select></td></tr>
+<tr><td>مبادئ علم الادوية</td><td>0.375</td><td><select class="grade"><option value="5">امتياز</option><option value="4.5">جيد جدا</option><option value="4">جيد</option><option value="3">متوسط</option><option value="2">مقبول</option><option value="1">ضعيف</option></select></td></tr>
+<tr><td>مبادئ الصحة العامة</td><td>0.375</td><td><select class="grade"><option value="5">امتياز</option><option value="4.5">جيد جدا</option><option value="4">جيد</option><option value="3">متوسط</option><option value="2">مقبول</option><option value="1">ضعيف</option></select></td></tr>
+<tr><td>المكونات الاختيارية للطالب II</td><td>0.375</td><td><select class="grade"><option value="5">امتياز</option><option value="4.5">جيد جدا</option><option value="4">جيد</option><option value="3">متوسط</option><option value="2">مقبول</option><option value="1">ضعيف</option></select></td></tr>
+<tr><td>جرائم حزب البعث</td><td>0.25</td><td><select class="grade"><option value="5">امتياز</option><option value="4.5">جيد جدا</option><option value="4">جيد</option><option value="3">متوسط</option><option value="2">مقبول</option><option value="1">ضعيف</option></select></td></tr>
+<tr><td>التعلم الالكتروني</td><td>0.25</td><td><select class="grade"><option value="5">امتياز</option><option value="4.5">جيد جدا</option><option value="4">جيد</option><option value="3">متوسط</option><option value="2">مقبول</option><option value="1">ضعيف</option></select></td></tr>
+<tr><td>العربي</td><td>0</td><td><span>---</span></td></tr>
+</tbody>
+</table>
+
+<button onclick="calc()">احسب التقدير النهائي</button>
+<div class="result" id="res">المعدل سيظهر هنا</div>
+<p>Done by rasool jamal</p>
+
+<script>
+function calc() {
+let total = 0;
+let unitsSum = 0;
+// مصفوفة الوحدات بنفس ترتيب المواد في الجدول
+let units = [1.125, 1.125, 0.75, 0.625, 0.375, 0.375, 0.375, 0.25, 0.25];
+let selects = document.querySelectorAll('.grade');
+
+for(let i = 0; i < selects.length; i++) {
+total += parseFloat(selects[i].value) * units[i];
+unitsSum += units[i];
+}
+
+let gpa = total / unitsSum;
+let note = gpa >= 4.5 ? "امتياز" : gpa >= 4.0 ? "جيد جدا" : gpa >= 3.0 ? "جيد" : gpa >= 2.0 ? "متوسط" : gpa >= 1.0 ? "مقبول" : "ضعيف";
+
+document.getElementById('res').innerHTML = "المعدل: " + gpa.toFixed(3) + "<br>" + "التقدير: " + note;
+}
+</script>
+</body>
+</html>
